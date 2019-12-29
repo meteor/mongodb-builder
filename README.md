@@ -10,10 +10,8 @@ docker build -t mongodb-builder .
 
 ## Usage
 
-The `run-builder.sh` script downloads the MongoDB source and builds `mongod` and `mongo`:
+The `run-builder.sh` script downloads the MongoDB source, builds `mongod` and `mongo`, and creates an archive (`mongodb-linux-x86_64-*.tgz`):
 
 ```sh
 ./run-builder.sh
 ```
-
-After the build is finished, the binaries can be found in `mongodb-src-r*`.
