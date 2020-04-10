@@ -1,8 +1,7 @@
-FROM debian:buster-slim
+FROM centos:7
 
-RUN \
-  apt-get update && \
-  apt-get install -y build-essential scons python3 python3-pip
+RUN yum install -y epel-release centos-release-scl
+RUN yum install -y python3-devel python3-scons devtoolset-8-gcc devtoolset-8-gcc-c++
 
 ADD build.sh .
 ENTRYPOINT ["/build.sh"]
