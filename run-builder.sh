@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-MONGODB_VERSION='4.2.5'
+MONGODB_VERSION='4.2.8'
 SRC="mongodb-src-r$MONGODB_VERSION"
 TARGET="mongodb-linux-x86_64-${MONGODB_VERSION}"
 BIN="$TARGET/bin"
