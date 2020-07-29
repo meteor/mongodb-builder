@@ -1,6 +1,6 @@
 # MongoDB Builder for Meteor Mongo using GitHub Actions
 
-![Build Meteor Mongo from SRC](https://github.com/wreiske/mongodb-builder/workflows/Build%20Meteor%20Mongo%20from%20SRC/badge.svg)
+![Build Meteor Mongo from SRC](https://github.com/meteor/mongodb-builder/workflows/Build%20Meteor%20Mongo%20from%20SRC/badge.svg)
 
 This repository automatically builds MongoDB for Linux from source without OpenSSL and cURL, similar to the generic Linux packages that are [not provided anymore since MongoDB 4.2](https://www.mongodb.com/blog/post/a-proposal-to-endoflife-our-generic-linux-tar-packages), using GitHub Actions.
 
