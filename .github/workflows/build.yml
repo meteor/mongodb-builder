@@ -6,11 +6,13 @@ on:
     types: [created]
 
 jobs:
-  build:
+  build-linux:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout master
         uses: actions/checkout@v2.3.1
+      - name: Install GCC 4.8
+        run: apt install gcc-4.8 g++-4.8
       - name: Run builder
         run: ./run-builder.sh
       - name: Upload the artifacts
