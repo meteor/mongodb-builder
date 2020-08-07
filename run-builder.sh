@@ -7,7 +7,23 @@ TARGET="mongodb-linux-x86_64-${MONGODB_VERSION}"
 BIN="$TARGET/bin"
 
 [ ! -d $SRC ] && curl "https://fastdl.mongodb.org/src/$SRC.tar.gz" | tar -xz
-docker run --rm -it -v $(pwd)/$SRC:/mongodb mongodb-builder
-mkdir -p $BIN
-mv "$SRC/mongo" "$SRC/mongod" $BIN
-tar -czf "$TARGET.tgz" $TARGET
+
+cd "$SRC"
+pip3 install scons
+pip3 install -r etc/pip/compile-requirements.txt
+
+./buildscripts/scons.py \
+  mongod mongo \
+  --ssl=off \
+  --enable-free-mon=off \
+  LINKFLAGS='-static-libstdc++' \
+  CC=gcc-8 \
+  CXX=g++-8
+
+strip mongo mongod
+
+mkdir -p ../$BIN
+mv "mongo" "mongod" ../$BIN
+cd ../
+tar -czf "$TARGET.tgz" $BIN
+
