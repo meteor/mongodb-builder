@@ -1,13 +1,16 @@
 # action.yml
 name: Build Meteor Mongo from SRC
 
-on:
-  release:
-    types: [created]
+on: push
+# return to release later
+#  release:
+#    types: [created]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs:
+      using: 'docker'
+      image: 'Dockerfile'
     steps:
       - name: Checkout master
         uses: actions/checkout@v2.3.1
