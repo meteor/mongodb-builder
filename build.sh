@@ -9,7 +9,8 @@ python3 buildscripts/scons.py \
   --ssl=off \
   --enable-free-mon=off -j 12 \
   --disable-warnings-as-errors \
-  LINKFLAGS='-static-libstdc++'
+  CCFLAGS='-Wno-write-strings' \
+  LINKFLAGS='-static-libstdc++ -static'
 
 
 cd build/install/bin

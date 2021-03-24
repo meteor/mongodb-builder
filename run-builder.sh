@@ -9,5 +9,5 @@ BIN="$TARGET/bin"
 [ ! -d $SRC ] && curl "https://downloads.mongodb.org/src/$SRC.tar.gz" | tar -xz
 docker run --memory=16g --rm -it -v $(pwd)/$SRC:/mongodb mongodb-builder
 mkdir -p $BIN
-mv "$SRC/build/install/bin/mongo" "$SRC/build/install/bin/mongod" $BIN
-tar -czf "$TARGET.tgz" $TARGET
+sudo mv "$SRC/build/install/bin/mongo" "$SRC/build/install/bin/mongod" $BIN
+sudo tar -czf "$TARGET.tgz" $TARGET
