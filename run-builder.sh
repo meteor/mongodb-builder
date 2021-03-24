@@ -7,6 +7,8 @@ TARGET="mongodb-linux-x86_64-${MONGODB_VERSION}"
 BIN="$TARGET/bin"
 
 [ ! -d $SRC ] && curl "https://downloads.mongodb.org/src/$SRC.tar.gz" | tar -xz
+cd $SRC && patch -p1 < 0001-Fix-SSL-off-build-OCSPManager-shouldn-t-be-used-when.patch
+cd ../
 docker run --memory=16g --rm -it -v $(pwd)/$SRC:/mongodb mongodb-builder
 mkdir -p $BIN
 sudo mv "$SRC/build/install/bin/mongo" "$SRC/build/install/bin/mongod" $BIN

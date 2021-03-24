@@ -1,0 +1,57 @@
+From 5101ec645038dd09edc8f4c295aacdf1c3827eeb Mon Sep 17 00:00:00 2001
+From: Renan Castro <renanccastro@gmail.com>
+Date: Wed, 24 Mar 2021 15:53:12 -0300
+Subject: [PATCH] Fix SSL off build, OCSPManager shouldn't be used when ssl =
+ off
+
+---
+ src/mongo/db/db.cpp         | 2 ++
+ src/mongo/s/server.cpp      | 2 ++
+ src/mongo/shell/dbshell.cpp | 2 ++
+ 3 files changed, 6 insertions(+)
+
+diff --git a/src/mongo/db/db.cpp b/src/mongo/db/db.cpp
+index 4804715116..a920e69c96 100644
+--- a/src/mongo/db/db.cpp
++++ b/src/mongo/db/db.cpp
+@@ -338,7 +338,9 @@ ExitCode _initAndListen(ServiceContext* serviceContext, int listenPort) {
+     auto runner = makePeriodicRunner(serviceContext);
+     serviceContext->setPeriodicRunner(std::move(runner));
+ 
++#ifdef MONGO_CONFIG_SSL
+     OCSPManager::get()->startThreadPool();
++#endif
+ 
+     if (!storageGlobalParams.repair) {
+         auto tl =
+diff --git a/src/mongo/s/server.cpp b/src/mongo/s/server.cpp
+index e2f3550486..41d2327ad2 100644
+--- a/src/mongo/s/server.cpp
++++ b/src/mongo/s/server.cpp
+@@ -640,7 +640,9 @@ ExitCode runMongosServer(ServiceContext* serviceContext) {
+         serviceContext->setPeriodicRunner(std::move(runner));
+     }
+ 
++#ifdef MONGO_CONFIG_SSL
+     OCSPManager::get()->startThreadPool();
++#endif
+ 
+     serviceContext->setServiceEntryPoint(std::make_unique<ServiceEntryPointMongos>(serviceContext));
+ 
+diff --git a/src/mongo/shell/dbshell.cpp b/src/mongo/shell/dbshell.cpp
+index 9fc8a96911..cdaff940c6 100644
+--- a/src/mongo/shell/dbshell.cpp
++++ b/src/mongo/shell/dbshell.cpp
+@@ -728,7 +728,9 @@ int _main(int argc, char* argv[], char** envp) {
+     // TODO This should use a TransportLayerManager or TransportLayerFactory
+     auto serviceContext = getGlobalServiceContext();
+ 
++#ifdef MONGO_CONFIG_SSL
+     OCSPManager::get()->startThreadPool();
++#endif
+ 
+     transport::TransportLayerASIO::Options opts;
+     opts.enableIPv6 = shellGlobalParams.enableIPv6;
+-- 
+2.30.2
+
