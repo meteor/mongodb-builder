@@ -9,7 +9,7 @@ pip3 install -r etc/pip/compile-requirements.txt
   install-core \
   --ssl=off \
   --enable-free-mon=off \
-  -j 12 \
+  -j 36 \
   LINKFLAGS='-static-libstdc++' \
   CC=/opt/rh/devtoolset-8/root/usr/bin/gcc \
   CXX=/opt/rh/devtoolset-8/root/usr/bin/g++
