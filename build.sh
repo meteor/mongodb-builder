@@ -3,6 +3,13 @@
 set -e
 cd /mongodb
 source /opt/rh/devtoolset-8/enable
+
+pip3 install --upgrade pip
+#upgrade pip
+pip3 install dataclasses
+pip3 install cryptography
+pip3 install setuptools_rust
+pip3 install scikit-build
 pip3 install -r etc/pip/compile-requirements.txt
 
 ./buildscripts/scons.py \
