@@ -4,8 +4,10 @@ set -e
 cd /mongodb
 source /opt/rh/devtoolset-8/enable
 
-pip3 install --upgrade pip
+python3 --version
 #upgrade pip
+pip3 install --upgrade pip
+python3 -m pip install https://github.com/mongodb/mongo-python-driver/archive/refs/tags/4.3.3.tar.gz
 pip3 install dataclasses
 pip3 install cryptography
 pip3 install setuptools_rust
