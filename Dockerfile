@@ -1,10 +1,10 @@
-FROM centos:7
+FROM ubuntu:22.04
 
-RUN yum install -y epel-release centos-release-scl
-RUN yum install -y python3-devel python3-scons devtoolset-8-gcc devtoolset-8-gcc-c++ xz-compat-libs libcurl-devel
-RUN yum install -y xz-lzma-compat xz-devel
-RUN yum install -y zlib-devel
 
+RUN apt update
+RUN apt install -y python3 python3-pip
+RUN apt install python-dev-is-python3 libssl-dev liblzma-dev -y
+RUN apt-get install build-essential -y
 
 ADD build.sh .
 ENTRYPOINT ["/build.sh"]

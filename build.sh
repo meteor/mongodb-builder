@@ -2,24 +2,17 @@
 
 set -e
 cd /mongodb
-source /opt/rh/devtoolset-8/enable
 
-pip3 install --upgrade pip
-#upgrade pip
-pip3 install dataclasses
-pip3 install cryptography
-pip3 install setuptools_rust
-pip3 install scikit-build
-pip3 install -r etc/pip/compile-requirements.txt
+python3 -m pip install -r etc/pip/compile-requirements.txt
+python3 -m pip install requirements_parser jsonschema memory_profiler puremagic networkx cxxfilt
+
+export GIT_PYTHON_REFRESH=quiet
 
 ./buildscripts/scons.py \
   install-core \
-  --ssl=off \
-  --enable-free-mon=off \
-  -j 16  \
+  -j 20  \
   LINKFLAGS='-static-libstdc++' \
-  CC=/opt/rh/devtoolset-8/root/usr/bin/gcc \
-  CXX=/opt/rh/devtoolset-8/root/usr/bin/g++
+  --linker=gold
 
 cd build/install/bin
 strip mongos mongod
