@@ -10,8 +10,7 @@ export GIT_PYTHON_REFRESH=quiet
 
 ./buildscripts/scons.py \
   install-core \
-  --ssl=off \
-  -j 12  \
+  -j 20  \
   LINKFLAGS='-static-libstdc++' \
   --linker=gold
 
